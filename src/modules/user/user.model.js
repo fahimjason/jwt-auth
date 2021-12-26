@@ -1,5 +1,6 @@
+const path = require('path');
+const sequelize = require(path.join(process.cwd(), 'src/config/lib/sequelize'));
 const { DataTypes } = require('sequelize');
-const sequelize = require('./dbmodel');
 const UserType = require('./user-type.model');
 
 const User = sequelize.define('users', {
@@ -33,7 +34,6 @@ const User = sequelize.define('users', {
     },
 });
 
-UserType.hasMany(User, { as: 'users', foreignKey: 'user_type_id' });
 User.belongsTo(UserType, { as: 'user_type', foreignKey: 'user_type_id' });
 
 module.exports = User;

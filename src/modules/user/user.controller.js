@@ -1,5 +1,5 @@
-const User = require('../models/user.model');
-const UserType = require('../models/user-type.model');
+const User = require('./user.model');
+const UserType = require('./user-type.model');
 
 const getUsers = async (req, res) => {
     try {
@@ -25,7 +25,11 @@ const getUser = async (req, res) => {
         const user = await User.findOne({
             where: {
                 id
-            }
+            },
+            include: [{
+                model: UserType,
+                as: 'user_type'
+            }]
         });
 
         if (!user) return res.status(404).send('User not found!');
