@@ -1,6 +1,6 @@
 const Product = require("./product.model");
 
-const getProducts = async (req, res) => {
+async function getProducts(req, res) {
     try {
         const products = await Product.findAll();
 
@@ -12,7 +12,7 @@ const getProducts = async (req, res) => {
     }
 }
 
-const getProduct = async (req, res) => {
+async function getProduct(req, res) {
     try {
         const { id } = req.params;
 
@@ -31,7 +31,7 @@ const getProduct = async (req, res) => {
     }
 }
 
-const addProduct = async (req, res) => {
+async function addProduct(req, res) {
     try {
         const { name, price, description, category } = req.body;
 
@@ -51,7 +51,7 @@ const addProduct = async (req, res) => {
     }
 }
 
-const putProduct = async (req, res) => {
+async function putProduct(req, res) {
     try {
         const { id } = req.params;
         const { name, price, description, category } = req.body;
@@ -77,7 +77,7 @@ const putProduct = async (req, res) => {
     }
 }
 
-const patchProduct = async (req, res) => {
+async function patchProduct(req, res) {
     try {
         const { id } = req.params;
         const { name, price, description, category } = req.body;
@@ -103,7 +103,7 @@ const patchProduct = async (req, res) => {
     }
 }
 
-const deleteProduct = async (req, res) => {
+async function deleteProduct(req, res) {
     const { id } = req.params;
 
     const product = await Product.findOne({

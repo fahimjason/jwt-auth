@@ -1,7 +1,7 @@
 const User = require('./user.model');
 const UserType = require('./user-type.model');
 
-const getUsers = async (req, res) => {
+async function getUsers(req, res) {
     try {
         const users = await User.findAll({
             include: [{
@@ -18,7 +18,7 @@ const getUsers = async (req, res) => {
     }
 }
 
-const getUser = async (req, res) => {
+async function getUser(req, res) {
     try {
         const { id } = req.params;
 
@@ -42,7 +42,7 @@ const getUser = async (req, res) => {
     }
 }
 
-const createUser = async (req, res) => {
+async function createUser(req, res) {
     try {
         const { username, email, password, userType } = req.body;
 
@@ -69,7 +69,7 @@ const createUser = async (req, res) => {
     }
 }
 
-const putUser = async (req, res) => {
+async function putUser(req, res) {
     try {
         const { id } = req.params;
         const { firstName, lastName, username, email } = req.body;
@@ -95,7 +95,7 @@ const putUser = async (req, res) => {
     }
 }
 
-const patchUser = async (req, res) => {
+async function patchUser(req, res) {
     try {
         const { id } = req.params;
         const { firstName, lastName, username, email } = req.body;
@@ -121,7 +121,7 @@ const patchUser = async (req, res) => {
     }
 }
 
-const deleteUser = async (req, res) => {
+async function deleteUser(req, res) {
     try {
         const { id } = req.params;
 

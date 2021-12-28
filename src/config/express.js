@@ -3,7 +3,7 @@ const path = require('path');
 const users = require(path.join(process.cwd(), 'src/modules/user/user.routes'));
 const products = require(path.join(process.cwd(), 'src/modules/product/product.routes'));
 
-module.exports = async function () {
+module.exports = async () => {
     const app = express();
 
     app.use(express.json());
@@ -16,5 +16,4 @@ module.exports = async function () {
     });
 
     return app;
-
 }
