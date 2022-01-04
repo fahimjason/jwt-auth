@@ -165,7 +165,7 @@ async function deleteUser(req, res) {
 
         await user.destroy();
 
-        res.sendStatus(200).send(user);
+        res.status(200).send(user);
     }
     catch (err) {
         console.log(err);

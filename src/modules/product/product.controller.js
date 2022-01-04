@@ -99,24 +99,30 @@ async function patchProduct(req, res) {
     }
     catch (err) {
         console.log(err);
-        res.status(500).send('Internal server error!')
+        res.status(500).send('Internal server error!');
     }
 }
 
 async function deleteProduct(req, res) {
-    const { id } = req.params;
+    try {
+        const { id } = req.params;
 
-    const product = await Product.findOne({
-        where: {
-            id
-        }
-    });
+        const product = await Product.findOne({
+            where: {
+                id
+            }
+        });
 
-    if (!product) return res.status(404).send('Product not found!');
+        if (!product) return res.status(404).send('Product not found!');
 
-    await product.destroy();
+        await product.destroy();
 
-    res.sendStatus(201).send(product);
+        res.status(201).send(product);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).send('Internal server error!')
+    }
 }
 
 module.exports.getProducts = getProducts;
