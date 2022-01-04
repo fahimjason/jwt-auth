@@ -38,5 +38,19 @@ const userUpdateSchema = object().shape({
             email => isEmailLengthValid(email))
 });
 
+const userLoginSchema = object().shape({
+    email: string()
+        .email('This field should be a valid email address.')
+        .max(100, 'Email must be at most 100 characters long.')
+        .required('Email is required.')
+        .test('is-valid-email-length', 'The part before @ of the email can be maximum 65 characters.',
+            email => isEmailLengthValid(email)),
+    password: string()
+        .min(8, 'The password must be at least 8 characters long.')
+        .max(50, 'The password must be at most 50 characters long.')
+        .required('Password is required.')
+});
+
 module.exports.userRegisterSchema = userRegisterSchema;
 module.exports.userUpdateSchema = userUpdateSchema;
+module.exports.userLoginSchema = userLoginSchema;

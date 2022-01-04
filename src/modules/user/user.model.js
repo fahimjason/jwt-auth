@@ -2,6 +2,7 @@ const path = require('path');
 const sequelize = require(path.join(process.cwd(), 'src/config/lib/sequelize'));
 const { DataTypes } = require('sequelize');
 const UserType = require('./user-type.model');
+const bcrypt = require('bcryptjs');
 
 const User = sequelize.define('users', {
     first_name: {
@@ -21,8 +22,11 @@ const User = sequelize.define('users', {
         allowNull: false
     },
     password: {
+        allowNull: false,
         type: DataTypes.STRING,
-        allowNull: false
+        set(value) {
+            this.setDataValue('password', bcrypt.hashSync(value, 8));
+        }
     },
     user_type_id: {
         type: DataTypes.INTEGER,
@@ -33,6 +37,10 @@ const User = sequelize.define('users', {
         values: [0, 1]
     },
 });
+
+User.prototype.validPassword = function (password) {
+    return bcrypt.compare(password, this.password);
+}
 
 User.belongsTo(UserType, { as: 'user_type', foreignKey: 'user_type_id' });
 
