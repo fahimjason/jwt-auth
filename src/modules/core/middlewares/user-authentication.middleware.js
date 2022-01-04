@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const verifyToken = (req, res, next) => {
-    const token = req.headers['access-token'];
+    const token = req.headers['access_token'];
 
     if (!token) return res.status(403).send('Authorization failed.');
 
